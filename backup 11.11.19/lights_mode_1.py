@@ -1,6 +1,34 @@
+
 from basic_functions import *
 
+
+# Main function
+
+def cycle():
+    while True:
+        sleep(0.2)
+        rainblend()
+        sleep(0.2)
+        singleSine()
+        sleep(0.2)
+        spinStrobe()
+        sleep(0.2)
+        Dance()
+        sleep(0.2)
+        #Thunder()
+        #sleep(0.2)
+        Spectrum()
+        sleep(0.2)
+        Sparkle()
+        sleep(0.2)
+        Calm()
+        sleep(0.2)
+        do_nothing()
+
+
 # Light shows
+
+
 
 def welcome():
         for i in range(16):
@@ -24,38 +52,81 @@ def welcome():
             np.write()
         reset()
 
-def calm():
-    z = 0
-    y = 0
-    x = randint(0,999999)
+def Sparkle():
+    h = 0
     while True:
-        if sine(y) > 0.1:
-            for i in range(16):
-                np[i] = hsv_to_rgb(sine(x),sine(z),sine(y))
-                np.write()
-        else:
-            x = randint(0,999999)
-            #z = randint(0,100)
-        y += 0.04
-        z += 0.033
-        if checkButton():
-            reset()
-            return
+        for i in range (1,201):
+            h += 0.5
+            for j in range(16):
+                np[j] = hsv_to_rgb(h,100,alog())
+            if button.value() == 0:
+                return
+            np.write()
+        h = 0
+    reset()
 
-def fastColours():
+def Thunder():
+    h = 0
+    while True:
+        if button.value() == 0:
+            return
+        for i in range (1,501):
+            if i <= 350:
+                l = i-1
+            else:
+                l = i - 251
+            h += 0.2
+            for j in range(16):
+                np[j] = hsv_to_rgb(h,100,thunder[l])
+            if button.value() == 0:
+                return
+            np.write()
+        h = 0
+    reset()
+
+def Calm():
+    h = 0
     s = 0
     while True:
-        if checkButton():
+        for i in range (1,1001):
+            h += 0.1
+            s+= 0.02
+            for j in range(16):
+                np[j] = hsv_to_rgb(h,100,(sin(s)+1)*50)
+            if button.value() == 0:
+                return
+            np.write()
+        h = 0
+    reset()
+
+def Dance():
+    s = 0
+    while True:
+        if button.value() == 0:
             return
-        s+= 0.05
+        s+= alog() / 100
         for j in range(16):
             np[j] = hsv_to_rgb((sin(s)+1)*50,100,100)
-        if checkButton():
+        if button.value() == 0:
             return
         np.write()
     reset()
 
-def pulse():
+def Spectrum():
+    #
+    while True:
+        m = []
+        for i in range(50):
+            m.append(alog())
+            avg = sum(m) / len(m)
+        for j in range(16):
+            np[j] = hsv_to_rgb(avg,100,100)
+        if button.value() == 0:
+            return
+        np.write()
+    reset()
+
+def singleSine():
     run = 1
     while True:
         for i in range (50):
@@ -63,10 +134,9 @@ def pulse():
                 hue = 0
                 s = 4.8
                 while True:
-                    if checkButton():
+                    if button.value() == 0:
                         return
-                    #speed = alog()
-                    speed = 4
+                    speed = alog()
                     if speed == 0:
                         speed = 1
                     s += speed / 100
@@ -92,7 +162,7 @@ def pulse():
                         np[(i + 2) % 16] = hsv_to_rgb((hue + 85) % 100,100,sine(s))
                         np.write()
 
-def allColours():
+def rainblend():
         while True:
             for color in range(12):
                 for i in range(16):
@@ -100,134 +170,49 @@ def allColours():
 
                 np.write()
                 for i in range(100):
-                    if checkButton():
+                    if button.value() == 0:
                         reset()
                         return
                     sleep(0.01)
                 for i in range(1,8):
                     for j in range(16):
                         np[j] = hsv_to_rgb(colors12[color]+i,100,100)
-                    if checkButton():
+                    if button.value() == 0:
                         reset()
                         return
                     np.write()
                     sleep(0.01)
 
-def spinning():
+
+
+def spinStrobe():
     def spin(color):
-        for j in range(1):
-            for i in range(160):
-                k = color % 100
-                np[(i + j) % 16] = hsv_to_rgb(k + i,100, wave(i))
-                if checkButton():
+        for j in range(16):
+            for i in range(16):
+                np[(i + j) % 16] = hsv_to_rgb(color % 100,100, wave(i))
+                if button.value() == 0:
                     return
                 np.write()
                 sleep(0.02)
                 reset()
-            #for i in range(100):
-            #    if i % 2 == 0:
-            #        np[15-(((i//2) + j) % 16)] = hsv_to_rgb(color+50 % 100,100, wave(i))
-            #        if checkButton():
-            #            return
-            #        np.write()
-            #        sleep(0.02)
-            #        #reset()
-            #    else:
-            #        reset()
-            #        sleep(0.05)
+            for i in range(32):
+                if i % 2 == 0:
+                    np[15-(((i//2) + j) % 16)] = hsv_to_rgb(color+50 % 100,100, wave(i))
+                    if button.value() == 0:
+                        return
+                    np.write()
+                    sleep(0.01)
+                    #reset()
+                else:
+                    reset()
+                    sleep(0.01)
     while True:
         color_set = ["lime", "fuschia", "orange", "green", "purple"]
         for color in color_set:
             spin(colors[color])
-        if checkButton():
+        if button.value() == 0:
             return
 
-def colorFade():
-    x = 0
-    count = 0
-    flag = False
-    while True:
-        if checkButton():
-            reset()
-            return
-        if sine(x) < 0.015 or sine(x) > 99.985:
-            flag = not flag
-        if flag:
-            setHue(sine(x))
-
-        x += 0.001
-
-def spectrum():
-    def setSing(p,h):
-        np[p] = hsv_to_rgb(h,100,100)
-    b = 0
-    while True:
-        if checkButton():
-            reset()
-            return
-        for i in range(16):
-            setSing(i,b)
-            np.write()
-            if i < 8:
-                b += 9
-            else:
-                b -= 8
-
-def puppieColors():
-    reset()
-    h = 0
-    while True:
-        setHue(h)
-        if button.value() == 1:
-            continue
-        while h < 25:
-            h+=1
-            setHue(h)
-        if button.value() == 1:
-            continue
-        while h < 66:
-            h+=1
-            if h % 2 == 0:
-                setHue(h)
-        if checkButton():
-            reset()
-            return
-
-def threeFlavours():
-    while True:
-        h = 0
-        for i in range(200):
-            setHue(h)
-            if checkButton():
-                reset()
-                return
-        for i in range(25):
-            h+=1
-            setHue(h)
-            setHue(h)
-            if checkButton():
-                reset()
-                return
-        for i in range(200):
-            setHue(h)
-            if checkButton():
-                reset()
-                return
-        for i in range(41):
-            h+=1
-            if h % 2 == 0:
-                setHue(h)
-                if checkButton():
-                    reset()
-                    return
-        for i in range(200):
-            setHue(h)
-            if checkButton():
-                reset()
-                return
-        while h < 100:
-            h +=1
-            setHue(h)
-            if checkButton():
-                reset()
-                return
+#welcome()
+#sleep(1)
+#cycle()

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nunito" rel="stylesheet">
+<style>
+* {
+ font-family: Nunito;
+}
+
+.pagename {
+    font-family: Inconsolata;
+    font-size: 400%
+}
+
+button {
+    display: inline-block;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0;
+    text-decoration: none;
+    background: #0069ed;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out,
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+button:hover,
+button:focus {
+    background: #0053ba;
+}
+
+button:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+button:active {
+    transform: scale(0.9);
+}
+
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 50%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 30px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+  <center>
+    <p class="pagename">pixelJar</class>
+    <p>
+    <button>Mode 1</button>
+    <button>Mode 2</button>
+    <button>Mode 3</button>
+    <button>Mode 4</button>
+    <button>Mode 5</button>
+    <button>Mode 6</button>
+  <p>
+    <div class="slidecontainer">
+      <p>Slider:</p>
+      <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+    </div>
+  </center?
+</body>

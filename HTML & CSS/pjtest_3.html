@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nunito|Bungee" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<style>
+	body{
+		margin: 30pt;
+		padding: 0;
+		font-family: Nunito;
+		color: #333;
+		/*background-color: #eee;*/
+	  background: #42426b;
+	  background-image: -webkit-linear-gradient(135deg, #8067B7, #EC87C0);
+	  background-image: linear-gradient(-90deg, #8067B7, #EC87C0);
+
+	}
+
+		h1, h2, h3, h4, h5, h6{
+			font-weight: 200;
+		}
+
+		h1{
+			text-align: center;
+			font-family: Inconsolata;
+			font-size: 50px;
+			padding-bottom: 10px;
+			border-bottom: 2px solid #2fcc71;
+			max-width: 40%;
+			margin: 20px auto;
+		}
+
+		/* CONTAINERS */
+
+		.container {max-width: 1200px; width: 95%; padding: 15pt; margin: 0 auto;background-color: #eee; border-radius: .9em;
+		   -webkit-filter: drop-shadow(1px 2px 5px rgba(0,0,0,.3));
+		  filter: drop-shadow(1px 2px 5px rgba(0,0,0,.3));
+		  box-shadow:
+		    0 2px 2px rgba(243,49,128,.5),
+		    0 0px 5px rgba(243,49,128,.15),
+		    0 0px 4px rgba(0,0,0,.35),
+		    0 5px 20px rgba(243,49,128,.25),
+		    0 15px 50px rgba(243,49,128,.75),
+		    inset 0 0 15px rgba(255,255,255,.05);
+		}
+		.four {width: 32.26%; max-width: 15%;}
+
+
+		/* COLUMNS */
+
+		.col {
+		  display: block;
+		  float:left;
+		  margin: 1% 0 1% 2%;
+		}
+
+		.col:first-of-type { margin-left: 0; }
+
+		/* CLEARFIX */
+
+		.cf:before,
+		.cf:after {
+		    content: " ";
+		    display: table;
+		}
+
+		.cf:after {
+		    clear: both;
+		}
+
+		.cf {
+		    *zoom: 1;
+		}
+
+		/* FORM */
+
+		.form .plan input, .form .payment-plan input, .form .payment-type input{
+			display: none;
+		}
+
+		.form label{
+			position: relative;
+			color: #fff;
+			background-color: #aaa;
+			font-size: 26px;
+			text-align: center;
+			height: 100px;
+			line-height: 150px;
+			display: block;
+			cursor: pointer;
+			border: 3px solid transparent;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+
+		.form .plan input:checked + label, .form .payment-plan input:checked + label, .form .payment-type input:checked + label{
+			border: 3px solid #333;
+			background-color: #2fcc71;
+		}
+
+
+		.submit{
+			padding: 15px 60px;
+			display: inline-block;
+			border: none;
+			margin: 20px 0;
+			background-color: #2fcc71;
+			color: #fff;
+			border: 2px solid #333;
+			font-size: 18px;
+			-webkit-transition: transform 0.3s ease-in-out;
+			-o-transition: transform 0.3s ease-in-out;
+			transition: transform 0.3s ease-in-out;
+		}
+
+
+	</style>
+</head>
+<body>
+
+	<div class="container">
+			<h1>pixel<b>Jar</b></h1>
+			<center><h3>a simple control interface</h3></center>
+			<form class="form cf">
+				<section class="plan cf">
+					<h2>Mode select:</h2>
+
+					<input type="radio" name="radio1" id="One" 	value="One" checked>
+								<label class="One-label four col"				for="One"								>One</label>
+					<input type="radio" name="radio1" id="Two" 		value="Two" >
+								<label class="Two-label four col"					for="Two"							>Two</label>
+					<input type="radio" name="radio1" id="Three" 	value="Three">
+								<label class="Three-label four col"				for="Three"						>Three</label>
+					<input type="radio" name="radio1" id="Four" 		value="Four">
+								<label class="Four-label four col"					for="Four"					>Four</label>
+	        <input type="radio" name="radio1" id="Five" 		value="Five">
+								<label class="Five-label four col"					for="Five"					>Five</label>
+					<input type="radio" name="radio1" id="Six" 	value="Six">
+								<label class="Six-label four col"				for="Six"								>Six</label>
+	      </section>
+
+				<input class="submit" type="submit" value="Submit">
+			</form>
+		</div>
+
+
+
+		<script>
+			$(document).ready(function() {
+			 // make following action fire when radio button changes
+			 $(‘input[type=radio]’).change(function(){
+						// find the submit button and click it on the previous action
+						$(‘input[type=submit]’).click()
+						});
+			 });
+		</script>
+</body>
